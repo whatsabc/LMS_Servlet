@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<c3p0-config>
+    <named-config name="myc3p0">
+        <property name="user">root</property>
+        <property name="password">mysql2020</property>
+        <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/lms?serverTimezone=GMT</property>
+    </named-config>
+</c3p0-config>
