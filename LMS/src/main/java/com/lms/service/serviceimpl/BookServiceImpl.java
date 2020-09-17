@@ -9,6 +9,7 @@ import com.lms.dao.UserDao;
 import com.lms.dao.daoimpl.BookDaoImpl;
 import com.lms.dao.daoimpl.RecordDaoImpl;
 import com.lms.dao.daoimpl.UserDaoImpl;
+import com.lms.factory.BeanFactory;
 import com.lms.service.BookService;
 
 import java.sql.SQLException;
@@ -16,9 +17,25 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class BookServiceImpl implements BookService {
-    UserDao userDao=new UserDaoImpl();
-    RecordDao recordDao=new RecordDaoImpl();
-    BookDao bookDao=new BookDaoImpl();
+
+    /**
+     * 此处存在耦合，我们使用工厂模式进行解耦
+     */
+    //UserDao userDao=new UserDaoImpl();
+    //RecordDao recordDao=new RecordDaoImpl();
+    //BookDao bookDao=new BookDaoImpl();
+
+    /**
+     * 使用BeanFactory进行解耦
+     */
+    UserDao userDao=(UserDao)BeanFactory.getBean("UserDao");
+    //用于测试生成的对象是否是单例对象，在debug模式中查看地址，发现是单例对象
+    UserDao userDao2=(UserDao)BeanFactory.getBean("UserDao");
+    UserDao userDao3=(UserDao)BeanFactory.getBean("UserDao");
+
+    RecordDao recordDao=(RecordDao)BeanFactory.getBean("RecordDao");
+    BookDao bookDao=(BookDao)BeanFactory.getBean("BookDao");
+
 
     @Override
     public String BookBorrow(int userId, String ISBN) {
